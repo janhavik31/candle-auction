@@ -42,9 +42,17 @@ A candle auction is a variation of an English auction in which the end of the au
 5.  **interact with deployed contract using console**
     npx hardhat console
 
-    eg. const CandleAuction = await ethers.getContractFactory("CandleAuction");
-    const candleAuction = await CandleAuction.attach("0xyourcontractaddress");
-    // Place a bid
-    await candleAuction.bid({ value: ethers.utils.parseEther("1.0") });
-    // Withdraw a bid
-    await candleAuction.withdraw();
+// Attach to the deployed contract
+const CandleAuction = await ethers.getContractFactory("CandleAuction");
+const candleAuction = CandleAuction.attach("0xYourContractAddress");
+
+// Place a bid
+await candleAuction.bid({ value: ethers.utils.parseEther("1.0") });
+
+// Withdraw a bid
+await candleAuction.withdraw();
+
+// Check the highest bid
+const highestBid = await candleAuction.highestBid();
+console.log("Highest Bid:", highestBid.toString());
+
